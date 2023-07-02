@@ -1,0 +1,29 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.filmography,
+.directed-films {
+    flex-basis: 48%;
+}
+
+h1, h2
+{
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 28px;
+    text-shadow: 2px 2px 4px green;
+    color: black;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.actor-info {
+    text-align: center;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}

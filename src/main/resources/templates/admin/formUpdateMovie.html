@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Film</title>
+    <link rel="stylesheet" href="/css/stileHeader.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileIndex.css?version=2"/>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <a href="/admin/manageMovie" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+
+<div><img src="/images/logo-siw.png" width="40%" class="center-image"></a></div>
+<div th:if="${movie}">
+    <h1 th:text="'Aggiorna film: ' + ${movie.titolo} + ' (' + ${movie.anno} + ')'">
+        Dettagli film
+    </h1>
+
+    <div class="box-container">
+        <!--- GESTIONE REGISTA --->
+        <div class="container">
+            <span>Regista:</span>
+            <span th:if="${movie.regista}">
+                <span th:text="${movie.regista.nome} + ' ' + ${movie.regista.cognome}"> Nome Cognome</span>
+                <a th:href="@{'/admin/addDirectorToMovie' + '/' + ${movie.id}}"> Modifica </a>
+            </span>
+            <span th:unless="${movie.regista}">
+            <a th:href="@{'/admin/addDirectorToMovie/' + ${movie.id}}"> Aggiungi regista </a>
+            </span>
+        </div>
+        <!--- GESTIONE ATTORI --->
+        <div class="container">
+        <span> Attori film
+            <a th:href="@{'/admin/editActor/' + ${movie.id}}"> Modifica attori </a>
+        </span>
+            <div th:if="${movie.attori.isEmpty()}">Non ci sono attori</div>
+            <div th:unless="${movie.attori.isEmpty()}" class="archive-list">
+                <ul>
+                    <li th:each="actor : ${actors}">
+                        <a th:href="@{'/artists' + '/' + ${actor.id}}"
+                           th:text="${actor.nome} + ' ' + ${actor.cognome}">Nome Cognome</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:unless="${movie}">
+    Non esiste
+</div>
+</body>
+</html>

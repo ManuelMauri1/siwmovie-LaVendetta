@@ -1,0 +1,5 @@
+html{
+    height: 100%;
+    background: linear-gradient(360deg, green, grey);
+    background-attachment: fixed;
+}

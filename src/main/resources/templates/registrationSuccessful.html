@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>SiwMovie - Registrazione conclusa</title>
+    <link rel="stylesheet" href="/css/stileForm.css"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css"/>
+</head>
+
+<body>
+<div>
+    <img src="/images/logo-siw.png" width="50%" class="center-image"/>
+</div>
+<h1>Congratulazioni ti sei registrato!</h1>
+<div class="container">
+    <div>
+        <span>Nome: </span>
+        <span th:text="${user.nome}"></span>
+    </div>
+    <div>
+        <span>Cognome: </span>
+        <span th:text="${user.cognome}"></span>
+    </div>
+    <div>
+        <span>Email: </span>
+        <span th:text="${user.email}"></span>
+    </div>
+    <div>
+        <a href="formLogin.html" class="text-button"> Torna al login </a>
+    </div>
+</div>
+</body>
+</html>

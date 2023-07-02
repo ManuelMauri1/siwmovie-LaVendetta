@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        Nuovo artista
+    </title>
+    <link rel="stylesheet" href="/css/stileForm.css?version=3"/>
+    <link rel="stylesheet" href="/css/stileHeader.css?version=3"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css?version=3"/>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <a href="/admin/indexArtist" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+
+<div><img src="/images/logo-siw.png" width="50%" class="center-image"/></div>
+<h1>Aggiungi un artista</h1>
+<form th:action="@{/admin/artist}" method="post" th:object="${artist}">
+    <div class="container">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
+
+        <div>
+            <label>Nome:</label> <span><input required type="text" th:field="*{nome}"/></span>
+        </div>
+        <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
+
+        <div>
+            <label>Cognome:</label> <span><input required type="text" th:field="*{cognome}"/></span>
+        </div>
+        <span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
+
+        <div>
+            <label>Data di nascita:</label> <span><input required type="date" name="dataN"/></span>
+        </div>
+
+        <div>
+            <label>Data di morte:</label> <span><input type="date" name="dataM"/></span>
+        </div>
+        <div>
+            <span><button type="submit">Conferma</button></span>
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

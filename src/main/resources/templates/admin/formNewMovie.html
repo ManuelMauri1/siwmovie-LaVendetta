@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        New Movie
+    </title>
+    <link rel="stylesheet" href="/css/stileHeader.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileForm.css?version=2"/>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <a href="/admin/indexMovie" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+
+<div><img src="/images/logo-siw.png" width="50%" class="center-image"/></div>
+<h1>Aggiungi un film</h1>
+<form th:action="@{/admin/newMovie}" method="post" th:object="${movie}" enctype="multipart/form-data">
+    <div class="container">
+        <div th:if="${#fields.hasGlobalErrors()}">
+            <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">...</p>
+        </div>
+
+        <div>
+            <label>
+                Titolo:
+            </label>
+            <span>
+            <input type="text" required="required" th:field="${movie.titolo}"/>
+        </span>
+            <span th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"></span>
+        </div>
+
+        <div>
+            <label>
+                Anno:
+            </label>
+            <span>
+            <input type="number" required="required" th:field="${movie.anno}"/>
+        </span>
+            <span th:if="${#fields.hasErrors('anno')}" th:errors="*{anno}"></span>
+        </div>
+
+        <div>
+            <label>Immagine:</label>
+            <span>
+            <input type="file" accept="image/png, image/jpeg" name="files" required="required"/>
+        </span>
+        </div>
+
+        <div>
+            <span><button type="submit">Conferma</button></span>
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

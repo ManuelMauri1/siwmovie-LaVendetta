@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Aggiungi regista</title>
+    <link rel="stylesheet" href="/css/stileHeader.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileIndex.css?version=2"/>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <a href="/admin/manageMovie" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+
+<div><img src="/images/logo-siw.png" width="40%" class="center-image"/></div>
+<h1>Aggiungi regista:</h1>
+<div th:if="${artists.isEmpty()}" class="container">Non ci sono artisti nel sistema</div>
+<div class="container">
+    <ul class="archive-list">
+        <li th:each="artist : ${artists}">
+            <a th:href="@{'/admin/setDirectorToMovie/' + ${artist.id} + '/' + ${movie.id}}"
+               th:text="${artist.nome} + ' ' + ${artist.cognome}">Up! (2000)</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

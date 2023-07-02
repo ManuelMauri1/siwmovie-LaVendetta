@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Film</title>
+    <link rel="stylesheet" href="/css/stileIndex.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileStelleFisse.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileHeader.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css?version=2"/>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <a href="/movies" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+<div>
+    <div>
+        <img src="/images/logo-siw.png" width="50%" class="center-image">
+    </div>
+    <div th:if="${movie}" class="box-container" th:object="${movie}">
+        <div class="details">
+            <img th:src="@{*{ImagePath}}">
+        </div>
+        <div class="container">
+            <h1 th:text="*{titolo}">Titolo</h1>
+            <div>
+                Anno:
+                <span th:text="'(' + *{anno} + ')'">Anno</span>
+            </div>
+            <div>
+                Regista:
+                <span th:if="*{regista}"
+                      th:text="${movie.regista.nome} + ' ' + ${movie.regista.cognome}"> regista </span>
+                <span th:unless="*{regista}"> Nessun regista </span>
+            </div>
+            <div>
+                Attori: <span th:if="*{attori.isEmpty()}"> Non ci sono attori </span>
+                <div>
+                    <ul>
+                        <li th:each="movieActor : ${movie.attori}">
+                            <span th:text="${movieActor.nome} + ' ' + ${movieActor.cognome}">Nome Cognome</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Recensioni Utenti</h1>
+        <div>
+            <div th:if="${movie.notizie.isEmpty()}">
+                Non sono presenti recensioni per questo film
+            </div>
+            <div>
+                <ul class="news-list">
+                    <li th:each="news : ${movie.notizie}">
+                        <div class="rating">
+                            <input type="radio" id="star5" name="rating" value="5" th:if="${news.voto == 5}">
+                            <label for="star5"></label>
+                            <input type="radio" id="star4" name="rating" value="4" th:if="${news.voto == 4}">
+                            <label for="star4"></label>
+                            <input type="radio" id="star3" name="rating" value="3" th:if="${news.voto == 3}">
+                            <label for="star3"></label>
+                            <input type="radio" id="star2" name="rating" value="2" th:if="${news.voto == 2}">
+                            <label for="star2"></label>
+                            <input type="radio" id="star1" name="rating" value="1" th:checked="${news.voto == 1}">
+                            <label for="star1"></label>
+                        </div>
+                        <div class="comment">
+                            <div class="author">
+                                    <span th:text="${news.user.username} + ': ' + ${news.titolo}">
+                                        Utente: Titolo
+                                    </span>
+                            </div>
+                            <div class="content">
+                                    <span th:text="${news.descrizione}">
+                                        Questo e' il testo del commento.
+                                    </span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div>
+                <a th:href="@{'/formNewNews/' + ${movie.id}}"> aggiungi recensione</a>
+            </div>
+        </div>
+    </div>
+    <div th:unless="${movie}">Non presente</div>
+</div>
+</body>
+</html>

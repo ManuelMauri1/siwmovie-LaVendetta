@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Film</title>
+    <link rel="stylesheet" href="/css/stileHeader.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileIndex.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileIndexMovie.css?version=2"/>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <a href="/success" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+
+<div><img src="/images/logo-siw.png" width="50%" class="center-image"/></div>
+<h1>Film</h1>
+<div th:if="${movies.isEmpty()}" class="container">Non ci sono film nel sistema</div>
+
+<ul class="movie-list">
+    <li th:each="movie : ${movies}" >
+        <div class="movie-card">
+            <div class="poster">
+                <div class="poster-image">
+                    <div class="poster2"></div>
+                    <img class="poster3" th:src="@{${movie.ImagePath}}"/>
+                </div>
+            </div>
+
+            <a th:href="@{'/movies' + '/' + ${movie.id}}"
+               th:text="${movie.titolo} + ' (' + ${movie.anno} + ')'" class="movie">Nome (Anno)</a>
+        </div>
+
+    </li>
+</ul>
+</body>
+
+</html>

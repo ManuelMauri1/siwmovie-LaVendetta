@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>
+        SiwMovie - Login
+    </title>
+    <link rel="stylesheet" href="/css/stileForm.css"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css"/>
+</head>
+
+<body>
+<div>
+    <img src="/images/logo-siw.png" width="50%" class="center-image"/>
+</div>
+<h1>Login</h1>
+<form th:action="@{/login}" method="POST">
+    <div class="container">
+        <div>
+            <span>Username:</span>
+            <span><input name="username" type="text" required/></span>
+        </div>
+        <div>
+            <span>Password:</span>
+            <span><input name="password" type="password" required/></span>
+        </div>
+        <div>
+            <span th:if="${param.error != null}">Username o password errati</span>
+        </div>
+
+        <div class="button-container">
+            <span><button type="submit">Login</button></span>
+            <a th:href="@{/register}" th:text="Registrati" class="text-button">Registrati</a>
+        </div>
+    </div>
+</form>
+</body>
+
+</html>

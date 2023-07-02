@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Artista</title>
+    <link rel="stylesheet" href="/css/stileDetailsArtist.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileSfondo.css?version=2"/>
+    <link rel="stylesheet" href="/css/stileHeader.css?version=2"/>
+    <!--- Per l'icona --->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+</head>
+
+<body>
+<header>
+    <div th:if="${userDetails}">
+        <span th:text="${userDetails.username}"></span>
+        <a href="/logout">Logout</a>
+    </div>
+    <a href="/artists" class="freccia-indietro">
+        <i class="fas fa-arrow-left"></i>
+        Torna indietro
+    </a>
+</header>
+<div><a href="/"><img src="/images/logo-siw.png" width="40%"/></a></div>
+
+<div th:if="${artist}" th:object="${artist}">
+    <div class="actor-info">
+        <h1 th:text="*{nome} + ' ' + *{cognome}">Nome Cognome</h1>
+        <p th:text="'Data di nascita: ' + *{dataNascita}"> Data Nascita </p>
+        <p> Data di morte:
+            <span th:if="*{dataMorte} != null">
+            <span th:text="*{dataMorte}"></span>
+        </span>
+            <span th:unless="*{dataMorte} != null">
+            Ancora in vita
+        </span>
+        </p>
+        <div class="container">
+            <div class="filmography">
+                <h2>Filmografia</h2>
+                <ul th:each="movie : *{partecipazione_film}">
+                    <li>
+                        <h3 th:text="${movie.titolo}">Titolo Film 1</h3>
+                        <p th:text="'Anno: ' + ${movie.anno}">Anno: XXXX</p>
+                    </li>
+                    <!-- Aggiungi altri film in cui l'attore ha recitato qui -->
+                </ul>
+            </div>
+
+            <div class="directed-films">
+                <h2>Film Diretti</h2>
+                <ul th:each="movie : *{film_diretti}">
+                    <li>
+                        <h3 th:text="${movie.titolo}">Titolo Film</h3>
+                        <p th:text="'Anno: ' + ${movie.anno}">Anno: XXXX</p>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:unless=" ${artist}">
+    Non esiste
+</div>
+</body>
+</html>

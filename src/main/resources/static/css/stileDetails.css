@@ -1,0 +1,179 @@
+.with-photo-profile,
+.with-photo-profile * {
+    box-sizing: border-box;
+}
+
+.with-photo-profile {
+    background: linear-gradient(180deg, lightgreen, gray);
+    border-radius: 25px;
+    width: 375px;
+    height: 600px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+}
+
+.line-username {
+    color: #838383;
+    text-align: left;
+    font: 400 20px "Roboto", sans-serif;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 2px 0 0 0;
+    width: 274px;
+    height: 0px;
+    position: absolute;
+    left: 13%;
+    top: 13%;
+}
+
+.username {
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    position: absolute;
+    left: 13%;
+    top: 10.4%;
+    outline: none;
+}
+
+.line-nome {
+    color: #838383;
+    text-align: left;
+    font: 400 20px "Roboto", sans-serif;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 2px 0 0 0;
+    width: 274px;
+    height: 0px;
+    position: absolute;
+    left: 45px;
+    top: 25%;
+}
+
+.nome {
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    position: absolute;
+    left: 13%;
+    top: 22.7%;
+    outline: none;
+}
+
+.line-cognome {
+    color: #838383;
+    text-align: left;
+    font: 400 20px "Roboto", sans-serif;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 2px 0 0 0;
+    width: 274px;
+    height: 0px;
+    position: absolute;
+    left: 45px;
+    top: 40%;
+}
+
+.cognome {
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    position: absolute;
+    left: 13%;
+    top: 37.5%;
+    outline: none;
+}
+
+
+.line-pwd {
+    color: #838383;
+    text-align: left;
+    font: 400 20px "Roboto", sans-serif;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 2px 0 0 0;
+    width: 274px;
+    height: 0px;
+    position: absolute;
+    left: 13%;
+    top: 55%;
+}
+
+.password {
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    position: absolute;
+    left: 13%;
+    top: 52.7%;
+    outline: none;
+}
+
+.line-email {
+    color: #838383;
+    text-align: left;
+    font: 400 20px "Roboto", sans-serif;
+    border-style: solid;
+    border-color: #dddddd;
+    border-width: 2px 0 0 0;
+    width: 274px;
+    height: 0px;
+    position: absolute;
+    left: 13%;
+    top: 70%;
+}
+
+.email {
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    position: absolute;
+    left: 13%;
+    top: 67.5%;
+    outline: none;
+
+}
+
+.sign-up-login {
+    text-align: left;
+    position: relative;
+    left: 15%;
+}
+
+.sign-up-login-span {
+    color: darkgray;
+    font: 500 40px "Roboto", sans-serif;
+}
+
+button {
+    position: absolute;
+    inset: 0;
+}
+
+.rectangle {
+    background: darkgray;
+    border-radius: 15px;
+    width: 142px;
+    height: 44px;
+    position: absolute;
+    left: 177px;
+    top: 80%;
+}
+
+.login {
+    color: black;
+    text-align: left;
+    font: 500 20px "Roboto", sans-serif;
+    position: absolute;
+    left: 223px;
+    top: 606px;
+}
+
+.center-image {
+    display: block;
+    margin: 0 auto;
+}

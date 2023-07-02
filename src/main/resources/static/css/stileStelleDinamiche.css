@@ -1,0 +1,29 @@
+.star-rating {
+    display: inline-block;
+    font-size: 0; /* Nasconde lo spazio bianco tra le icone delle stelle */
+    unicode-bidi: bidi-override; /* Risolve il problema dell'allineamento sx->dx delle icone */
+    direction: rtl; /* Inverte l'ordine delle icone delle stelle */
+}
+
+.star-rating input {
+    display: none; /* Nasconde gli input radio per la votazione */
+}
+
+.star-rating label {
+    display: inline-block;
+    font-size: 24px; /* Dimensione dell'icona della stella */
+    color: gray; /* Colore delle stelle vuote */
+    cursor: pointer;
+}
+
+.star-rating label:before {
+    content: '\2606'; /* Codice Unicode per stella vuota */
+}
+
+.star-rating input:checked ~ label {
+    color: yellow; /* Colore delle stelle piene */
+}
+
+.star-rating input:checked ~ label:before {
+    content: '\2605'; /* Codice Unicode per stella piena */
+}

@@ -1,0 +1,28 @@
+.rating {
+    display: inline-block;
+    direction: rtl; /* Imposta la direzione da destra a sinistra */
+}
+
+.rating input {
+    display: none; /* Nasconde gli input radio */
+}
+
+.rating label {
+    display: inline-block;
+    color: #ddd;
+    font-size: 24px;
+    margin: 0 2px;
+    cursor: pointer;
+}
+
+.rating label:before {
+    content: '\2605'; /* Codice Unicode per la stella */
+}
+
+.rating input[value="5"] ~ label,
+.rating input[value="4"] ~ label,
+.rating input[value="3"] ~ label,
+.rating input[value="2"] ~ label,
+.rating input[value="1"] ~ label {
+    color: gold; /* Cambia il colore delle stelle per il valore desiderato */
+}

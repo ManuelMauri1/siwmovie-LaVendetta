@@ -24,6 +24,7 @@ public class NewsService {
         news.setVoto(voto);
         news.setUser(user);
         saveNews(news);
+        System.out.println("NEW NEWS:  ");
         credentialsService.addNews(user, news);
         movieService.addNotizia(movie, news);
         movieService.saveMovie(movie);

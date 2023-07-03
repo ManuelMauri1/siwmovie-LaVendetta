@@ -3,6 +3,8 @@ package it.uniroma3.siw.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Data
 @NoArgsConstructor
@@ -23,5 +25,5 @@ public class Credentials {
     private User user;
 
     @OneToOne
-    private News recensione;
+    private News recensioni;
 }

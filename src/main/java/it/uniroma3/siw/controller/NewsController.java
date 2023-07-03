@@ -13,8 +13,6 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class NewsController {
     @Autowired
-    private MovieRepository movieRepository;
-    @Autowired
     private NewsService newsService;
     @Autowired
     private MovieService movieService;

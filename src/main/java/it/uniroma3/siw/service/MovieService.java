@@ -109,7 +109,7 @@ public class MovieService {
 
     @Transactional
     public void addNotizia(Movie movie, News news) {
-        System.out.println("ADD NOTIZIA: " + news.getId() + ' ' + news.getUser().getId());
+        System.out.println("ADD NOTIZIA: ");
         if (movie.getNotizie().isEmpty())
             movie.getNotizie().add(news);
         else {
@@ -123,6 +123,7 @@ public class MovieService {
                 else
                     System.out.println("FALSE ");
             }
+            System.out.println("ADD NOTIZIA: ");
             movie.getNotizie().add(news);
         }
     }

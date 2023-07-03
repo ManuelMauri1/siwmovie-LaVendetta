@@ -31,7 +31,7 @@ public class CredentialsService {
 
     @Transactional
     public void addNews(Credentials user, News news){
-        user.setRecensione(news);
+        user.setRecensioni(news);
     }
 
     @Transactional

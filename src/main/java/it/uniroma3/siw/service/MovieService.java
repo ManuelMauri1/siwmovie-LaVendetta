@@ -17,6 +17,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -108,6 +109,7 @@ public class MovieService {
 
     @Transactional
     public void addNotizia(Movie movie, News news) {
+        System.out.println("ADD NOTIZIA: " + news.getId() + ' ' + news.getUser().getId());
         if (movie.getNotizie().isEmpty())
             movie.getNotizie().add(news);
         else {
@@ -115,8 +117,11 @@ public class MovieService {
             while (iterator.hasNext()) {
                 News notizia = iterator.next();
                 if (notizia.getUser().equals(news.getUser())) {
+                    System.out.println("TRUE ");
                     iterator.remove();
                 }
+                else
+                    System.out.println("FALSE ");
             }
             movie.getNotizie().add(news);
         }

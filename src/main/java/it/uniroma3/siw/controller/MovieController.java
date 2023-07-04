@@ -63,9 +63,9 @@ public class MovieController {
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable("id") Long id, Model model) {
         Movie movie = movieService.getMovie(id);
-        Image image = movie.getImage();
+        Image movieImage = movie.getImage();
         model.addAttribute("movie", movie);
-        model.addAttribute("image", image);
+        model.addAttribute("image", movieImage);
         return "movie.html";
     }
 

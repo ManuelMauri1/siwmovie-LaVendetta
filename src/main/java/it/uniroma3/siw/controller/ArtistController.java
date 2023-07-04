@@ -34,10 +34,11 @@ public class ArtistController {
 
     @PostMapping("/admin/artist")
     public String newArtist(@Valid @RequestParam("dataN")String dataN, @RequestParam("dataM")String dataM, @ModelAttribute("artist") Artist artist, BindingResult bindingResult, Model model){
-        artistValidator.validate(artist, bindingResult);
+        Artist artistDaVerificare = artistService.setNewArtist(artist, dataN, dataM);
+        artistValidator.validate(artistDaVerificare, bindingResult);
         if(!bindingResult.hasErrors()){
-            artistService.saveNewArtist(artist, dataN, dataM);
-            model.addAttribute("artist", artist);
+            artistService.saveArtist(artistDaVerificare);
+            model.addAttribute("artist", artistDaVerificare);
             return "artist.html";
         } else {
             return "admin/formNewArtist";

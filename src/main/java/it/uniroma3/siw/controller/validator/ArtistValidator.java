@@ -11,7 +11,7 @@ import org.springframework.validation.Validator;
 @Component
 public class ArtistValidator implements Validator {
     @Autowired
-    ArtistRepository artistRepository;
+    private ArtistRepository artistRepository;
 
     @Override
     public boolean supports(Class<?> aClass) {
@@ -20,12 +20,13 @@ public class ArtistValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "NotBlank.artist.nome");
-        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "NotBlank.artist.cognome");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nome", "NotBlank");
+        ValidationUtils.rejectIfEmptyOrWhitespace(errors, "cognome", "NotBlank");
 
         Artist artist = (Artist) o;
-        if(artistRepository.existsByNomeAndCognome(artist.getNome(), artist.getCognome())){
+        if(artistRepository.existsByNomeAndCognome(artist.getNome(), artist.getCognome()))
             errors.reject("artist.duplicati");
-        }
+        if (artist.getDataMorte() != null && artist.getDataNascita().isAfter(artist.getDataMorte()))
+            errors.reject("artist.dataNascita.dopoDataMorte");
     }
 }

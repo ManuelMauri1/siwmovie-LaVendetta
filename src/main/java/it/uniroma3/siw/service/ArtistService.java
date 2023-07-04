@@ -20,11 +20,12 @@ public class ArtistService {
         artistRepository.save(artist);
     }
     @Transactional
-    public void saveNewArtist(Artist artist, String dataN, String dataM){
-        artist.setDataNascita(LocalDate.parse(dataN));
+    public Artist setNewArtist(Artist artist, String dataN, String dataM){
+        Artist artistSettato = new Artist(artist.getNome(),artist.getCognome());
+        artistSettato.setDataNascita(LocalDate.parse(dataN));
         if (!dataM.isEmpty())
-            artist.setDataMorte(LocalDate.parse(dataM));
-        artistRepository.save(artist);
+            artistSettato.setDataMorte(LocalDate.parse(dataM));
+        return artistSettato;
     }
 
     @Transactional

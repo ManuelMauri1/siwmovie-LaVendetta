@@ -1,5 +1,7 @@
 package it.uniroma3.siw.controller;
 
+import it.uniroma3.siw.controller.validator.CredentialsValidator;
+import it.uniroma3.siw.controller.validator.UserValidator;
 import it.uniroma3.siw.model.Credentials;
 import it.uniroma3.siw.model.User;
 import it.uniroma3.siw.service.CredentialsService;
@@ -19,6 +21,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
 public class AuthenticationController {
+    @Autowired
+    private CredentialsValidator credentialsValidator;
+    @Autowired
+    private UserValidator userValidator;
     @Autowired
     private CredentialsService credentialsService;
     @Autowired
@@ -73,19 +79,29 @@ public class AuthenticationController {
 
     @PostMapping(value = { "/register" })
     public String registerUser(@Valid @ModelAttribute("user") User user,
-                               BindingResult userBindingResult, @Valid
-                               @ModelAttribute("credentials") Credentials credentials,
+                               BindingResult userBindingResult,
+                               @Valid @ModelAttribute("credentials") Credentials credentials,
                                BindingResult credentialsBindingResult,
                                Model model) {
-
+        userValidator.validate(user, userBindingResult);
+        credentialsValidator.validate(credentials, credentialsBindingResult);
         // se user e credential hanno entrambi contenuti validi, memorizza User e the Credentials nel DB
-        if(!userBindingResult.hasErrors() && ! credentialsBindingResult.hasErrors()) {
+        boolean userErrors = userBindingResult.hasErrors();
+        boolean credentialsErrors = credentialsBindingResult.hasErrors();
+        if(!userErrors && !credentialsErrors) {
             userService.saveUser(user);
             userService.setUser(credentials, user);
             credentialsService.saveCredentials(credentials);
             model.addAttribute("user", user);
             return "registrationSuccessful";
         }
-        return "registerUser";
+        else{
+            if(userErrors)
+                model.addAttribute("Errore", userBindingResult.getAllErrors().get(0).getDefaultMessage());
+            else if (credentialsErrors)
+                model.addAttribute("Errore", credentialsBindingResult.getAllErrors().get(0).getCode());
+
+            return "formRegisterUser";
+        }
     }
 }

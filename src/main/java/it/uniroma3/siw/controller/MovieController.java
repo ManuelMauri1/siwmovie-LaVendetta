@@ -54,10 +54,9 @@ public class MovieController {
             this.movieService.saveNewMovie(file, movie);
             model.addAttribute("movie", movie);
             return "movie.html";
-        } else {
-            System.out.println(bindingResult.getAllErrors().get(0));
+        } else
             return "admin/formNewMovie";
-        }
+
     }
 
     @GetMapping("/movies/{id}")

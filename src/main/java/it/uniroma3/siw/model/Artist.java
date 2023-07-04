@@ -36,6 +36,11 @@ public class Artist {
         partecipazione_film = new ArrayList<>();
         film_diretti = new ArrayList<>();
     }
+    public Artist(String nome, String cognome){
+        new Artist();
+        this.nome = nome;
+        this.cognome = cognome;
+    }
 
     @Override
     public boolean equals(Object o) {

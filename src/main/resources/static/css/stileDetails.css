@@ -1,9 +1,9 @@
-.with-photo-profile,
-.with-photo-profile * {
+.registrazione,
+.registrazione * {
     box-sizing: border-box;
 }
 
-.with-photo-profile {
+.registrazione {
     background: linear-gradient(180deg, lightgreen, gray);
     border-radius: 25px;
     width: 375px;
@@ -27,7 +27,7 @@
     height: 0px;
     position: absolute;
     left: 13%;
-    top: 13%;
+    top: 18%;
 }
 
 .username {
@@ -36,7 +36,7 @@
     width: 70%;
     position: absolute;
     left: 13%;
-    top: 10.4%;
+    top: 15.5%;
     outline: none;
 }
 
@@ -50,8 +50,8 @@
     width: 274px;
     height: 0px;
     position: absolute;
-    left: 45px;
-    top: 25%;
+    left: 13%;
+    top: 29%;
 }
 
 .nome {
@@ -60,7 +60,7 @@
     width: 70%;
     position: absolute;
     left: 13%;
-    top: 22.7%;
+    top: 26.2%;
     outline: none;
 }
 
@@ -74,8 +74,8 @@
     width: 274px;
     height: 0px;
     position: absolute;
-    left: 45px;
-    top: 40%;
+    left: 13%;
+    top: 42%;
 }
 
 .cognome {
@@ -84,7 +84,7 @@
     width: 70%;
     position: absolute;
     left: 13%;
-    top: 37.5%;
+    top: 39.5%;
     outline: none;
 }
 

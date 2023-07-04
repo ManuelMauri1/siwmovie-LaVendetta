@@ -14,47 +14,54 @@
     <img src="/images/logo-siw.png" width="40%"/>
 </div>
 
-<form th:action="@{/register}" method="POST">
-
-    <div class="with-photo-profile center-image">
+<form th:action="@{/register}" method="POST" th:object="${credentials}">
+    <div class="registrazione center-image">
         <div class="sign-up-login">
             <span class="sign-up-login-span">Registrazione </span>
+            <span th:if="${#fields.hasGlobalErrors()}">
+                <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">
+            </span>
         </div>
-
         <div>
             <div>
-                <label class="line-pwd"> Password</label>
-                <input type="text" maxlength="30" class="password" required th:field="${credentials.password}"/>
-                <span th:if="${#fields.hasErrors('user.email')}" th:errors="${user.email}"
-                      th:style="'color:red'"></span>
-            </div>
-
-            <div>
-                <label class="line-email"> Email</label>
-                <input type="text" maxlength="30" class="email" required th:field="${user.email}"/>
-            </div>
-
-            <div>
-                <label class="line-nome"> Nome</label>
-                <input type="text" maxlength="30" class="nome" required th:field="${user.nome}"/>
-                <span th:if="${#fields.hasErrors('user.nome')}" th:errors="${user.nome}"
-                      th:style="'color:red'"></span>
-            </div>
-            <div>
-                <label class="line-cognome"> Cognome</label>
-                <input type="text" maxlength="30" class="cognome" required th:field="${user.cognome}"/>
-                <span th:if="${#fields.hasErrors('user.cognome')}" th:errors="${user.cognome}"
-                      th:style="'color:red'"></span>
-            </div>
-            <div>
                 <label class="line-username"> Username</label>
-                <input type="text" maxlength="30" class="username" required th:field="${credentials.username}"/>
-                <span th:if="${#fields.hasErrors('credentials.username')}" th:errors="${credentials.username}"
+                <input type="text" maxlength="30" class="username" required th:field="*{username}"/>
+                <span class="username" th:if="${#fields.hasErrors('username')}"
+                      th:errors="*{username}"
                       th:style="'color:red'"> </span>
             </div>
+            <div>
+                <label class="line-pwd"> Password</label>
+                <input type="text" maxlength="30" class="password" required th:field="*{password}"/>
+                <span class="password" th:if="${#fields.hasErrors('password')}"
+                      th:errors="${credentials.password}"
+                      th:style="'color:red'"></span>
+            </div>
 
+            <div th:object="${user}">
+                <div class="sign-up-login" th:if="${#fields.hasGlobalErrors()}">
+                    <p th:each="err : ${#fields.globalErrors()}" th:text="${err}">
+                </div>
+                <div>
+                    <label class="line-nome"> Nome</label>
+                    <input type="text" maxlength="30" class="nome" required th:field="*{nome}"/>
+                    <span class="nome" th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+                          th:style="'color:red'"></span>
+                </div>
+                <div>
+                    <label class="line-cognome"> Cognome</label>
+                    <input type="text" maxlength="30" class="cognome" required th:field="*{cognome}"/>
+                    <span class="cognome" th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"
+                          th:style="'color:red'"></span>
+                </div>
+                <div>
+                    <label class="line-email"> Email</label>
+                    <input type="text" maxlength="30" class="email" required th:field="*{email}"/>
+                    <span class="email" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                          th:style="'color:red'"></span>
+                </div>
+            </div>
         </div>
-
         <div>
             <button class="rectangle" type="submit">Registra</button>
         </div>

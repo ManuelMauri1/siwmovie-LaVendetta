@@ -2,6 +2,7 @@ package it.uniroma3.siw.controller;
 
 import it.uniroma3.siw.controller.validator.MovieValidator;
 import it.uniroma3.siw.model.Artist;
+import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.service.ArtistService;
 import it.uniroma3.siw.service.MovieService;
@@ -61,7 +62,10 @@ public class MovieController {
 
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable("id") Long id, Model model) {
-        model.addAttribute("movie", movieService.getMovie(id));
+        Movie movie = movieService.getMovie(id);
+        Image image = movie.getImage();
+        model.addAttribute("movie", movie);
+        model.addAttribute("image", image);
         return "movie.html";
     }
 

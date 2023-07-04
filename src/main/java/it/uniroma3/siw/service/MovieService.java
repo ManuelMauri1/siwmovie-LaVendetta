@@ -1,34 +1,26 @@
 package it.uniroma3.siw.service;
 
-import it.uniroma3.siw.controller.validator.MovieValidator;
 import it.uniroma3.siw.model.Artist;
+import it.uniroma3.siw.model.Image;
 import it.uniroma3.siw.model.Movie;
 import it.uniroma3.siw.model.News;
 import it.uniroma3.siw.repository.MovieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
-
 import java.io.IOException;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.StandardCopyOption;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 @Service
 public class MovieService {
     @Autowired
-    MovieRepository movieRepository;
+    private MovieRepository movieRepository;
     @Autowired
-    MovieValidator movieValidator;
+    private ArtistService artistService;
     @Autowired
-    ArtistService artistService;
+    private ImageService imageService;
 
     @Transactional
     public void saveMovie(Movie movie) {
@@ -53,13 +45,13 @@ public class MovieService {
 
     @Transactional
     public void saveNewMovie(MultipartFile file, Movie movie) throws IOException {
-        /*Se ho un'immagine del movie*/
+        /*Se ho un'immagine del movie
         if (!file.isEmpty()) {
-            /*Ricavo dal file di upload il suo nome e lo setto in "urlImage" del nuovo movie e lo salvo*/
+            //Ricavo dal file di upload il suo nome e lo setto in "urlImage" del nuovo movie e lo salvo
             String nomeFile = StringUtils.cleanPath(file.getOriginalFilename());
             movie.setImage(nomeFile);
             Movie movieSalvato = movieRepository.save(movie);
-            /*Per avere disponibile una cartella con tutte le foto dei singoli movie*/
+            //Per avere disponibile una cartella con tutte le foto dei singoli movie
             String uploadDir = "./foto-movie/" + movieSalvato.getId();
             Path uploadPath = Paths.get(uploadDir);
             if (!Files.exists(uploadPath)) {
@@ -72,9 +64,12 @@ public class MovieService {
                 throw new IOException("Errore di upload: " + nomeFile, e);
             }
         }
-        /*Altrimenti*/
-        else
-            movieRepository.save(movie);
+        //Altrimenti
+        else*/
+        Image image = new Image(file.getBytes());
+        imageService.saveImage(image);
+        movie.setImage(image);
+        movieRepository.save(movie);
     }
 
     @Transactional
@@ -119,8 +114,7 @@ public class MovieService {
                 if (notizia.getUser().equals(news.getUser())) {
                     System.out.println("TRUE ");
                     iterator.remove();
-                }
-                else
+                } else
                     System.out.println("FALSE ");
             }
             System.out.println("ADD NOTIZIA: ");

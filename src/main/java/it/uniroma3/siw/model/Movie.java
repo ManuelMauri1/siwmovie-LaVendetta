@@ -25,7 +25,9 @@ public class Movie {
     @Min(1900)
     @Max(2023)
     private Integer anno;
-    private String image;
+
+    @OneToOne
+    private Image image;
 
     @OneToMany
     @JoinColumn(name = "movie_id")
@@ -42,11 +44,11 @@ public class Movie {
         notizie = new ArrayList<>();
     }
 
-    @Transient
+    /*@Transient
     public String getImagePath(){
         if(image == null || id == null) return null;
         return "/foto-movie/" + id + "/" + image;
-    }
+    }*/
 
     @Override
     public boolean equals(Object o) {

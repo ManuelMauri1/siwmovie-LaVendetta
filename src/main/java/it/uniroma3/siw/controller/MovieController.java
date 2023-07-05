@@ -63,9 +63,7 @@ public class MovieController {
     @GetMapping("/movies/{id}")
     public String getMovie(@PathVariable("id") Long id, Model model) {
         Movie movie = movieService.getMovie(id);
-        Image movieImage = movie.getImage();
         model.addAttribute("movie", movie);
-        model.addAttribute("image", movieImage);
         return "movie.html";
     }
 
@@ -161,6 +159,4 @@ public class MovieController {
 
         return "admin/addActorsToMovie.html";
     }
-
-
 }

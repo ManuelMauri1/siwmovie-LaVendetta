@@ -30,11 +30,6 @@ public class CredentialsService {
     }
 
     @Transactional
-    public void addNews(Credentials user, News news){
-        user.setRecensioni(news);
-    }
-
-    @Transactional
     public Credentials saveCredentials(Credentials credentials) {
         credentials.setRuolo(Credentials.RUOLO_DEFAULT);
         credentials.setPassword(this.passwordEncoder.encode(credentials.getPassword()));

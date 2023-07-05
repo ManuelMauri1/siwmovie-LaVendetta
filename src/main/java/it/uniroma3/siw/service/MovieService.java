@@ -1,14 +1,13 @@
 package it.uniroma3.siw.service;
 
-import it.uniroma3.siw.model.Artist;
-import it.uniroma3.siw.model.Image;
-import it.uniroma3.siw.model.Movie;
-import it.uniroma3.siw.model.News;
+import it.uniroma3.siw.model.*;
 import it.uniroma3.siw.repository.MovieRepository;
+import it.uniroma3.siw.repository.NewsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +20,8 @@ public class MovieService {
     private ArtistService artistService;
     @Autowired
     private ImageService imageService;
+    @Autowired
+    private NewsRepository newsRepository;
 
     @Transactional
     public void saveMovie(Movie movie) {
@@ -45,27 +46,6 @@ public class MovieService {
 
     @Transactional
     public void saveNewMovie(MultipartFile file, Movie movie) throws IOException {
-        /*Se ho un'immagine del movie
-        if (!file.isEmpty()) {
-            //Ricavo dal file di upload il suo nome e lo setto in "urlImage" del nuovo movie e lo salvo
-            String nomeFile = StringUtils.cleanPath(file.getOriginalFilename());
-            movie.setImage(nomeFile);
-            Movie movieSalvato = movieRepository.save(movie);
-            //Per avere disponibile una cartella con tutte le foto dei singoli movie
-            String uploadDir = "./foto-movie/" + movieSalvato.getId();
-            Path uploadPath = Paths.get(uploadDir);
-            if (!Files.exists(uploadPath)) {
-                Files.createDirectories(uploadPath);
-            }
-            try (InputStream inputStream = file.getInputStream()) {
-                Path filePath = uploadPath.resolve(nomeFile);
-                Files.copy(inputStream, filePath, StandardCopyOption.REPLACE_EXISTING);
-            } catch (IOException e) {
-                throw new IOException("Errore di upload: " + nomeFile, e);
-            }
-        }
-        //Altrimenti
-        else*/
         Image image = new Image(file.getBytes());
         imageService.saveImage(image);
         movie.setImage(image);
@@ -103,22 +83,29 @@ public class MovieService {
     }
 
     @Transactional
-    public void addNotizia(Movie movie, News news) {
-        System.out.println("ADD NOTIZIA: ");
-        if (movie.getNotizie().isEmpty())
-            movie.getNotizie().add(news);
-        else {
+    public void addNotizia(News newsDaInserire, Movie movie) {
+        if (movie.getNotizie().isEmpty()) {
+            movie.getNotizie().add(newsDaInserire);
+        } else {
             Iterator<News> iterator = movie.getNotizie().iterator();
             while (iterator.hasNext()) {
-                News notizia = iterator.next();
-                if (notizia.getUser().equals(news.getUser())) {
-                    System.out.println("TRUE ");
+                News newsAttuale = iterator.next();
+                if (newsAttuale.getAutore().equals(newsDaInserire.getAutore())) {
+                    newsRepository.delete(newsAttuale);
                     iterator.remove();
-                } else
-                    System.out.println("FALSE ");
+                }
             }
-            System.out.println("ADD NOTIZIA: ");
-            movie.getNotizie().add(news);
+            movie.getNotizie().add(newsDaInserire);
         }
+    }
+
+    @Transactional
+    public List<Movie> getMoviesDaRegista(Artist regista) {
+        return movieRepository.findAllByRegista(regista);
+    }
+
+    @Transactional
+    public List<Movie> getMoviesPartecipazione(Artist attore) {
+        return movieRepository.findAllByAttoriContaining(attore);
     }
 }

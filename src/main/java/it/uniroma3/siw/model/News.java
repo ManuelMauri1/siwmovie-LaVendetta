@@ -14,7 +14,5 @@ public class News {
     private Integer voto;
     private String titolo;
     private String descrizione;
-
-    @OneToOne
-    private Credentials user;
+    private String autore;
 }

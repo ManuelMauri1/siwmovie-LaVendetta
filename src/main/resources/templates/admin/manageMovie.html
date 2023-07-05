@@ -32,7 +32,7 @@
             <div class="poster">
                 <div class="poster-image">
                     <div class="poster2"></div>
-                    <img class="poster3" th:src="@{${movie.ImagePath}}"/>
+                    <img class="poster3" th:src="@{'data:image/*;base64,'+${movie.image.base64Image}}"/>
                 </div>
             </div>
             <div>

@@ -44,12 +44,6 @@ public class Movie {
         notizie = new ArrayList<>();
     }
 
-    /*@Transient
-    public String getImagePath(){
-        if(image == null || id == null) return null;
-        return "/foto-movie/" + id + "/" + image;
-    }*/
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Iterator;
+
 @Service
 public class NewsService {
     @Autowired
@@ -18,15 +20,12 @@ public class NewsService {
     CredentialsService credentialsService;
 
     @Transactional
-    public Movie newNews(String username, Long idM, News news, Integer voto){
+    public Movie newNews(String autore, Long idM, News news, Integer voto) {
         Movie movie = movieService.getMovie(idM);
-        Credentials user = credentialsService.getCredentials(username);
         news.setVoto(voto);
-        news.setUser(user);
+        news.setAutore(autore);
         saveNews(news);
-        System.out.println("NEW NEWS:  ");
-        credentialsService.addNews(user, news);
-        movieService.addNotizia(movie, news);
+        movieService.addNotizia(news, movie);
         movieService.saveMovie(movie);
         return movie;
     }

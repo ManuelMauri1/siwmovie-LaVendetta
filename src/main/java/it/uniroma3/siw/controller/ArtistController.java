@@ -3,6 +3,7 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.controller.validator.ArtistValidator;
 import it.uniroma3.siw.model.Artist;
 import it.uniroma3.siw.service.ArtistService;
+import it.uniroma3.siw.service.MovieService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,12 +11,16 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @Controller
 public class ArtistController {
     @Autowired
     private ArtistValidator artistValidator;
     @Autowired
     private ArtistService artistService;
+    @Autowired
+    private MovieService movieService;
 
     @GetMapping("/indexArtist")
     public String indexArtist(){return "indexArtist.html";}
@@ -47,7 +52,10 @@ public class ArtistController {
 
     @GetMapping("/artists/{idArtist}")
     public String getArtist(@PathVariable("idArtist")Long idA, Model model){
-        model.addAttribute("artist", artistService.getArtist(idA));
+        Artist artist = artistService.getArtist(idA);
+        model.addAttribute("artist", artist);
+        model.addAttribute("movies_registi", movieService.getMoviesDaRegista(artist));
+        model.addAttribute("movies_partecipazione", movieService.getMoviesPartecipazione(artist));
         return "artist.html";
     }
 }

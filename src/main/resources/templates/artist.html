@@ -37,7 +37,7 @@
         <div class="container">
             <div class="filmography">
                 <h2>Filmografia</h2>
-                <ul th:each="movie : *{partecipazione_film}">
+                <ul th:each="movie : ${movies_partecipazione}">
                     <li>
                         <h3 th:text="${movie.titolo}">Titolo Film 1</h3>
                         <p th:text="'Anno: ' + ${movie.anno}">Anno: XXXX</p>
@@ -48,7 +48,7 @@
 
             <div class="directed-films">
                 <h2>Film Diretti</h2>
-                <ul th:each="movie : *{film_diretti}">
+                <ul th:each="movie : ${movies_registi}">
                     <li>
                         <h3 th:text="${movie.titolo}">Titolo Film</h3>
                         <p th:text="'Anno: ' + ${movie.anno}">Anno: XXXX</p>

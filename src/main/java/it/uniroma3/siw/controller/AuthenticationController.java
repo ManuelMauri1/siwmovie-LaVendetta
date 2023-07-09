@@ -96,11 +96,6 @@ public class AuthenticationController {
             return "registrationSuccessful";
         }
         else{
-            if(userErrors)
-                model.addAttribute("Errore", userBindingResult.getAllErrors().get(0).getDefaultMessage());
-            else if (credentialsErrors)
-                model.addAttribute("Errore", credentialsBindingResult.getAllErrors().get(0).getCode());
-
             return "formRegisterUser";
         }
     }

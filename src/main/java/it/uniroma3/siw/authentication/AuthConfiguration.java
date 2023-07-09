@@ -53,7 +53,7 @@ public class AuthConfiguration {
                 .requestMatchers(HttpMethod.POST,"/register", "/login").permitAll()
                 .requestMatchers(HttpMethod.GET,"/admin/**").hasAnyAuthority(RUOLO_ADMIN)
                 .requestMatchers(HttpMethod.POST,"/admin/**").hasAnyAuthority(RUOLO_ADMIN)
-                // tutti gli utenti autenticati possono accere alle pagine rimanenti
+                // tutti gli utenti autenticati possonaccere alle pagine rimanenti
                 .anyRequest().authenticated()
                 // LOGIN: qui definiamo il login
                 .and().formLogin()

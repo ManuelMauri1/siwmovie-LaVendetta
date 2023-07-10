@@ -113,6 +113,16 @@
     outline: none;
 }
 
+.occhio{
+    border: none;
+    background-color: transparent;
+    width: 70%;
+    position: absolute;
+    left: 40%;
+    top: 56%;
+    outline: none;
+}
+
 .line-email {
     color: #838383;
     text-align: left;

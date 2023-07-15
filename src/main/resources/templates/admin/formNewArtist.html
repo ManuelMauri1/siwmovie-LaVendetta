@@ -33,12 +33,12 @@
         </div>
 
         <div>
-            <label>Nome:</label> <span><input required type="text" th:field="*{nome}"/></span>
+            <label>Nome:</label> <span><input required type="text" maxlength="30" th:field="*{nome}"/></span>
         </div>
         <span th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span>
 
         <div>
-            <label>Cognome:</label> <span> <input required type="text" th:field="*{cognome}"/></span>
+            <label>Cognome:</label> <span> <input required type="text" maxlength="30" th:field="*{cognome}"/></span>
         </div>
         <span th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span>
 

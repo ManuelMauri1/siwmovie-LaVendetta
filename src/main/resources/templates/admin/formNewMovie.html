@@ -37,7 +37,7 @@
                 Titolo:
             </label>
             <span>
-            <input type="text" required="required" th:field="${movie.titolo}"/>
+            <input type="text" required="required" maxlength="30" th:field="${movie.titolo}"/>
         </span>
             <span th:if="${#fields.hasErrors('titolo')}" th:errors="*{titolo}"></span>
         </div>
